@@ -13,6 +13,14 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Ticket::create([
+            'user_id' => 2, // Usuario Ejemplo
+            'title' => 'Problema con el login',
+            'description' => 'No puedo iniciar sesión con mis credenciales.',
+            'status' => 'open',
+            'priority' => 'high',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
