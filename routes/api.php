@@ -1,13 +1,16 @@
-Route::group([
+<?php
 
-'middleware' => 'api',
-'prefix' => 'auth'
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
 
-], function ($router) {
+// Rutas de autenticación
+Route::prefix('')->group(function () {
+    Route::get('GetAllUsers', [UserController::class, 'GetAllUsers'])->name('usuarios');
+    Route::post('Login', [UserController::class, 'Login'])->name('Login');
+});
 
-Route::post('login', 'AuthController@login');
-Route::post('logout', 'AuthController@logout');
-Route::post('refresh', 'AuthController@refresh');
-Route::post('me', 'AuthController@me');
+// Rutas protegidas
+Route::middleware('auth:api')->group(function (){
 
 });
