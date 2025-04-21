@@ -1,11 +1,11 @@
 # 📋 Sistema de Tickets
 Este proyecto es el backend de un Sistema de **Tickets** hecho en **Laravel**. Se recomienda descargar el [Frontend]() para una mejor experiencia.
-## ✨ Caracteristicas del sistema
+## ✨ Características del sistema
 - Registro de usuarios
-- Inicio de sesion y autenticacion con JWT
+- Inicio de sesión y autenticación con JWT
 - Roles de usuario (Administrador, Soporte y Usuario)
-- Creacion de Tickets
-- Gestion de tickets y usuarios
+- Creación de Tickets
+- Gestión de tickets y usuarios
 
 ## 🧪 Tecnologías usadas
 - Laravel
@@ -24,7 +24,7 @@ composer install
 git clone
 cd repo
 
-# Cracion del archivo de entorno
+# Creación del archivo de entorno
 cp .env.example .env
 
 # Generar keys
@@ -39,23 +39,13 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-## 🔌 Endpoints
-
-| Metodo | Ruta   | Descripción  |
-|:----------|:--------:|---------:|
-| Registro de usuario | WIP | WIP  |
-| Iniciar sesión | WIP | WIP  |
-| Crear ticket | WIP | WIP  |
-| Responder ticket | WIP | WIP  |
-
 ## 👥 Usuarios de prueba
 
 | Rol | Correo   | Contraseña  |
 |:----------|:--------:|---------:|
-| Admin | WIP | WIP  |
-| Soporte | WIP | WIP  |
-| Cliente | WIP | WIP  |
-| Cliente | WIP | WIP  |
+| Admin | admin@ticket.cl | admin123  |
+| Soporte | soporte@ticket.cl | soporte123  |
+| Cliente | juan@gmail.com | cliente123  |
 
 ## 🔐 Roles y permisos
 
@@ -64,3 +54,16 @@ php artisan serve
 | Administrador    | Gestión tickets y usuarios |
 | Soporte    | Responde y gestiona los tickets  |
 | Usuario    | Creación de tickets y navegación básica|
+
+## 🔌 Endpoints
+
+| Método | Ruta   | Descripción  |
+|:----------|:--------:|---------:|
+| GET | WIP | WIP  |
+| GET | WIP | WIP  |
+| GET | WIP | WIP  |
+| GET | WIP | WIP  |
+| POST | WIP | Registro de usuario  |
+| POST | WIP | Iniciar sesión  |
+| POST | WIP | Crear ticket  |
+| POST | WIP | Responder ticket  |
