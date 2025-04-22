@@ -24,6 +24,22 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
+    // Helper
+    public function hasRole($role){
+        return $this->role->name === $role;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->name === 'Administrador';
+    }
+
+    public function isSupport()
+    {
+        return $this->role->name === 'Soporte';
+    }
+
+    // Relaciones
     public function role(){
         return $this->belongsTo(Role::class);
     }
