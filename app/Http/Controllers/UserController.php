@@ -41,7 +41,16 @@ class UserController extends Controller
                 ], 401);
             }
 
-            $user = Auth::user();
+            $user = JWTAuth::user();
+
+            return response([
+                'message' => 'Se ha iniciado sesión exitosamente',
+                'data' => [
+                    'token' => $token,
+                    'user' => $user,
+                ],
+                'error' => false,
+            ],200);
             
         }catch (Exception $e){
             return response([
@@ -51,18 +60,13 @@ class UserController extends Controller
             ],500);
         }
 
-        return response([
-            'message' => 'Se ha iniciado sesión exitosamente',
-            'data' => [$user],
-            'error' => false,
-        ],200);
     }
 
     public function Register(Request $request)
     {
         $messages = $this->GetMessages();
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ], $messages);
@@ -72,7 +76,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         // Rol: usuario
-        $user->role_id = '0'; 
+        $user->role_id = '1'; 
         $user->save();
 
         return response([
