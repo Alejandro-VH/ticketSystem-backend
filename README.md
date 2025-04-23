@@ -1,5 +1,5 @@
 # 📋 Sistema de Tickets
-Este proyecto es el backend de un Sistema de **Tickets** hecho en **Laravel**. Se recomienda descargar el [Frontend]() para una mejor experiencia.
+Este proyecto es el backend de un Sistema de **Tickets** hecho en **Laravel**.
 ## ✨ Características del sistema
 - Registro de usuarios
 - Inicio de sesión y autenticación con JWT
@@ -57,7 +57,7 @@ php artisan serve
 
 ## 🔌 Endpoints
 
-Puedes ver ejemplos de consumir los endpoints [aquí]()
+Puedes ver ejemplos de consumir los endpoints [aquí]() **(WIP)**
 
 ### Usuarios
 | Método | Ruta   | Descripción  | Requiere autenticación |
