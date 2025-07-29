@@ -14,10 +14,10 @@ Route::post('register', [UserController::class, 'Register'])->name('registro');
 Route::middleware('auth:api')->group(function (){
     Route::post('logout', [UserController::class, 'Logout']);
 
-    Route::post('ticket', [TicketController::class, 'CreateTicket']);
+    Route::post('tickets', [TicketController::class, 'CreateTicket']);
     Route::get('my-tickets', [TicketController::class, 'GetMyTickets']);
-    Route::patch('ticket/{id}', [TicketController::class, 'UpdateTicket']);
-    Route::post('ticket/{id}/response', [TicketResponseController::class, 'CreateResponse']);
+    Route::patch('tickets/{id}', [TicketController::class, 'UpdateTicket']);
+    Route::post('tickets/{id}/response', [TicketResponseController::class, 'CreateResponse']);
 });
 
 // Rutas protegidas por autenticación y exclusivas para administradores y soporte
@@ -27,9 +27,9 @@ Route::middleware(['auth:api', 'role:admin,soporte'])->group(function () {
 
     Route::get('tickets', [TicketController::class, 'GetAllTickets']);
     Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);
-    Route::get('tickets/user/{id}', [TicketController::class, 'GetTicketsByUserId']);
-    Route::patch('ticket/{id}/priority', [TicketController::class, 'ChangePriority']);
-    Route::patch('ticket/{id}/status', [TicketController::class, 'ChangeStatus']);
-    Route::patch('ticket/{id}/toggle', [TicketController::class, 'ToggleEnabled']);
+    Route::get('users/{id}/tickets', [TicketController::class, 'GetTicketsByUserId']);
+    Route::patch('tickets/{id}/priority', [TicketController::class, 'ChangePriority']);
+    Route::patch('tickets/{id}/status', [TicketController::class, 'ChangeStatus']);
+    Route::patch('tickets/{id}/toggle', [TicketController::class, 'ToggleEnabled']);
 
 });
