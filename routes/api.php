@@ -15,6 +15,7 @@ Route::middleware('auth:api')->group(function (){
     Route::post('logout', [UserController::class, 'Logout']);
 
     Route::post('ticket', [TicketController::class, 'CreateTicket']);
+    Route::get('my-tickets', [TicketController::class, 'GetMyTickets']);
     Route::patch('ticket/{id}', [TicketController::class, 'UpdateTicket']);
     Route::post('ticket/{id}/response', [TicketResponseController::class, 'CreateResponse']);
 });
