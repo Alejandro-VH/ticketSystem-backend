@@ -1,41 +1,63 @@
-# 📋 Sistema de Tickets
-Este proyecto es el backend de un Sistema de **Tickets** hecho en **Laravel**.
+# 📋 Sistema de Tickets - backend
+Este proyecto corresponde al backend de un Sistema de gestión de **Tickets** desarrollado con **Laravel**. Permite a los usuarios registrar tickets y que estos sean respondidos por el equipo de soporte.
+
 ## ✨ Características del sistema
 - Registro de usuarios
 - Inicio de sesión y autenticación con JWT
 - Roles de usuario (Administrador, Soporte y Usuario)
-- Creación de Tickets y la capacidad de responderles
-- Gestión de tickets y usuarios
+- Creación de Tickets y la capacidad de responderlos
+- Gestión de tickets y usuarios (CRUD)
 
 ## 🧪 Tecnologías usadas
-- Laravel
+- PHP 8.4.7
+- Laravel 12.8.1
 - Docker
 - MySQL
 
-## 📦 Dependencias
+## 📋 Requisitos
+- PHP
+- Composer
+- Docker
+- Disponibilidad del puerto: 3306
+
+## ⚙️ Instalación
+1. Clonar el repositorio
 ```bash
-# Instalar composer
+git clone https://github.com/Alejandro-VH/TicketSystem.git
+cd ticketSystem-backend
+```
+
+2. Instalar dependencias
+```bash
 composer install
 ```
 
-## ⚙️ Instalación
+3. Copia el archivo de variables de entorno
 ```bash
-# Clonación del proyecto
-git clone
-cd repo
+# Windows
+copy .env.example .env
 
-# Creación del archivo de entorno
+# Linux / MacOS
 cp .env.example .env
+```
 
-# Generar keys
+4. Genera la clave de la aplicación y el secreto JWT
+```bash
 php artisan key:generate
 php artisan jwt:secret
+```
 
-# Ejecutar migraciones y cargar datos de prueba
-php artisan migrate
+5. Inicia un contenedor con Docker
+```bash
+docker compose up -d
+```
+
+6. Ejecutar migraciones y cargar datos de prueba
+```bash
 php artisan migrate --seed
-
-# Iniciar aplicación
+```
+7. Iniciar aplicación
+```bash
 php artisan serve
 ```
 
@@ -57,10 +79,10 @@ php artisan serve
 
 ## 🔌 Endpoints
 
-Puedes ver ejemplos de consumir los endpoints [aquí]() **(WIP)**
+Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 
 ### Usuarios
-| Método | Ruta   | Descripción  | Requiere autenticación |
+| Método | Ruta   | Descripción  | Autenticación |
 |:----------|:--------:|:---------:|:---------:|
 | GET | /api/users | Retorna todos los usuarios  | ✅ |
 | GET | /api/users/{id} | Retorna un usuario por su id | ✅ |
@@ -74,15 +96,15 @@ Puedes ver ejemplos de consumir los endpoints [aquí]() **(WIP)**
 |:----------|:--------:|:---------:|:---------:|
 | GET | /api/tickets | Retorna todos los tickets  | ✅ |
 | GET | /api/tickets/{id} | Retorna un ticket por su id  | ✅ |
-| GET | /api/tickets/user/{id} | Retorna todos los tickets de un usuario  | ✅ |
-| POST | /api/ticket | Crear ticket  | ✅ |
-| POST | /api/ticket/{id}/response | Responder ticket  | ✅ |
-| PATCH | /api/ticket/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
-| PATCH | ticket/{id}/status | Cambia el estado (open,in_progress,closed)  | ✅ |
-| PATCH | ticket/{id}/toggle | WIP  | ✅ |
+| GET | /api/users/{id}/tickets | Retorna todos los tickets de un usuario  | ✅ |
+| POST | /api/tickets | Crear ticket  | ✅ |
+| POST | /api/tickets/{id}/response | Responder ticket  | ✅ |
+| PATCH | /api/tickets/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
+| PATCH | /api/tickets/{id}/status | Cambia el estado (open,in_progress,closed)  | ✅ |
+| PATCH | /api/tickets/{id}/toggle | Habilita / deshabilita el ticket  | ✅ |
 
 
 ## 👤 Autor
 #### Alejandro Villarroel
-Estudiante de Ingenieria en computacion e informatica
+Estudiante de Ingenieria en computación e informática
 - [Linkedin](https://www.linkedin.com/in/alevillarroel/)
