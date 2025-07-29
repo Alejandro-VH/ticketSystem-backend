@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@ticket.cl',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'), 
-            'remember_token' => \Str::random(10),
+            'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -37,7 +38,7 @@ class UserSeeder extends Seeder
             'email' => 'soporte@ticket.cl',
             'email_verified_at' => now(),
             'password' => Hash::make('soporte123'),
-            'remember_token' => \Str::random(10),
+            'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -48,7 +49,7 @@ class UserSeeder extends Seeder
             'email' => 'juan@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('cliente123'),
-            'remember_token' => \Str::random(10),
+            'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
