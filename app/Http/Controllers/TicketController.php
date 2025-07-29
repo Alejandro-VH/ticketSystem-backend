@@ -308,6 +308,39 @@ class TicketController extends Controller
         }
     }
 
+    public function getMyTickets(){
+        // Validar si el usuario esta autenticado
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!$user) {
+            return response([
+                'message' => 'El usuario actual no esta autenticado',
+                'data' => [],
+                'error' => true,
+            ], 403);
+        }
+        try {
+            $tickets = Ticket::where('user_id', $user->id)->get();
+            if ($tickets->isEmpty()){
+                return response([
+                    'message' => 'No se encontraron tickets para este usuario',
+                    'data' => [],
+                    'error' => true,
+                ],404);
+            }
+            return response([
+                'message' => 'Tickets encontrados exitosamente',
+                'data' => [$tickets],
+                'error' => false,
+            ],200);
+        } catch (Exception $e) {
+            return response([
+                'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
+                'data' => ['error' => $e->getMessage()],
+                'error' => true,
+            ],500);
+        }
+    }
+
     public function GetMessages(){
         return [
             'title.required' => 'El campo título es requerido',
