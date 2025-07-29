@@ -26,7 +26,7 @@ class User extends Authenticatable implements JWTSubject
 
     // Helper
     public function hasRole($role){
-        return $this->role->name === $role;
+        return $this->role && $this->role->name === $role;
     }
 
     public function isAdmin()
