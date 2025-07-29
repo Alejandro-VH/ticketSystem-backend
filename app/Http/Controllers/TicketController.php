@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Exception;
 
 class TicketController extends Controller
 {
@@ -271,7 +273,7 @@ class TicketController extends Controller
         }
     }
 
-    public function GetTicketsFromUser()
+    public function GetTicketsFromUser($id)
     {
         // Validar si el usuario esta autenticado
         $user = JWTAuth::parseToken()->authenticate();
