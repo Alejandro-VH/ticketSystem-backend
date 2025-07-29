@@ -308,7 +308,7 @@ class TicketController extends Controller
         }
     }
 
-    public function getMyTickets(){
+    public function GetMyTickets(){
         // Validar si el usuario esta autenticado
         $user = JWTAuth::parseToken()->authenticate();
         if (!$user) {
