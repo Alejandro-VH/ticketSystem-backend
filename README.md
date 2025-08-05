@@ -56,6 +56,7 @@ docker compose up -d
 ```bash
 php artisan migrate --seed
 ```
+> puede tener problemas con los seeders si no cuenta con la extensión mbstring habilitada en su php.ini
 7. Iniciar aplicación
 ```bash
 php artisan serve
