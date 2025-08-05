@@ -76,7 +76,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         // Rol: usuario
-        $user->role_id = '1'; 
+        $user->role_id = '3'; 
         $user->save();
 
         return response([
@@ -104,7 +104,9 @@ class UserController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        $currentToken = JWTAuth::getToken();
+        $newToken = JWTAuth::refresh($currentToken);
+        return $this->respondWithToken($newToken);
     }
 
     /**
@@ -119,7 +121,7 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => JWTAuth::factory()->getTTL() * 60
         ]);
     }
 
