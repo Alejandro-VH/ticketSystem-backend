@@ -17,7 +17,8 @@ Route::middleware('auth:api')->group(function (){
     Route::post('tickets', [TicketController::class, 'CreateTicket']);
     Route::get('my-tickets', [TicketController::class, 'GetMyTickets']);
     Route::patch('tickets/{id}', [TicketController::class, 'UpdateTicket']);
-    Route::post('tickets/{id}/response', [TicketResponseController::class, 'CreateResponse']);
+    Route::post('tickets/{id}/responses', [TicketResponseController::class, 'CreateResponse']);
+    Route::get('tickets/{id}/responses', [TicketResponseController::class, 'getResponse']);
 });
 
 // Rutas protegidas por autenticación y exclusivas para administradores y soporte
