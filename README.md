@@ -99,8 +99,9 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 | GET | /api/tickets/{id} | Retorna un ticket por su id  | ✅ |
 | GET | /api/users/{id}/tickets | Retorna todos los tickets de un usuario  | ✅ |
 | GET | /api/my-tickets | Retorna todos los tickets del usuario  | ✅ |
+| GET | /api/tickets/{id}/responses | Retorna todos las respuestas de un ticket  | ✅ |
 | POST | /api/tickets | Crear ticket  | ✅ |
-| POST | /api/tickets/{id}/response | Responder ticket  | ✅ |
+| POST | /api/tickets/{id}/responses | Responder ticket  | ✅ |
 | PATCH | /api/tickets/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
 | PATCH | /api/tickets/{id}/status | Cambia el estado (open,in_progress,closed)  | ✅ |
 | PATCH | /api/tickets/{id}/toggle | Habilita / deshabilita el ticket  | ✅ |
