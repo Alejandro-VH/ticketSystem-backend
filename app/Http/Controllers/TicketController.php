@@ -308,6 +308,41 @@ class TicketController extends Controller
         }
     }
 
+    public function GetMyTicketById($id)
+    {
+        // Validar si el usuario esta autenticado
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!$user) {
+            return response([
+                'message' => 'El usuario actual no esta autenticado',
+                'data' => [],
+                'error' => true,
+            ], 403);
+        }
+        // Realizamos la consulta
+        try {
+            $ticket = Ticket::where('user_id', $id)->first();
+            if (!$ticket){
+                return response([
+                    'message' => 'No se encontró el ticket',
+                    'data' => [],
+                    'error' => true,
+                ],404);
+            }
+            return response([
+                'message' => 'Ticket encontrado exitosamente',
+                'data' => [$ticket],
+                'error' => false,
+            ],200);
+        } catch (Exception $e){
+            return response([
+                'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
+                'data' => ['error' => $e->getMessage()],
+                'error' => true,
+            ],500);
+        }
+    }
+
     public function GetMyTickets(){
         // Validar si el usuario esta autenticado
         $user = JWTAuth::parseToken()->authenticate();

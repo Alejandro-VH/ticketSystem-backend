@@ -16,6 +16,7 @@ Route::middleware('auth:api')->group(function (){
 
     Route::post('tickets', [TicketController::class, 'CreateTicket']);
     Route::get('my-tickets', [TicketController::class, 'GetMyTickets']);
+    Route::get('tickets/my/{id}', [TicketController::class, 'GetMyTicketById']);
     Route::patch('tickets/{id}', [TicketController::class, 'UpdateTicket']);
     Route::post('tickets/{id}/responses', [TicketResponseController::class, 'CreateResponse']);
     Route::get('tickets/{id}/responses', [TicketResponseController::class, 'getResponse']);
