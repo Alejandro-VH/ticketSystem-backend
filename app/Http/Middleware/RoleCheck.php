@@ -16,7 +16,7 @@ class RoleCheck
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         // Check if the user has any of the required roles
-        if (! $request->user() || ! $request->user()->hasAnyRole($roles)) {
+        if (! $request->user() || !$request->user()->hasRole($roles)) {
             return response()->json(['error' => 'No autorizado.'], 403);
         }
 
