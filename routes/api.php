@@ -27,7 +27,8 @@ Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function ()
     Route::get('users', [UserController::class, 'GetAllUsers']);
     Route::get('users/stats', [UserController::class, 'GetUserStats']);
     Route::get('users/{id}', [UserController::class, 'GetUserById']);
-    
+    Route::patch('users/{id}/toggle', [UserController::class, 'ToggleEnabled']);
+
     Route::get('tickets', [TicketController::class, 'GetAllTickets']);
     Route::get('/tickets/stats', [TicketController::class, 'getTicketStats']);
     Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);

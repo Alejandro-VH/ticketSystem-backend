@@ -123,6 +123,41 @@ class UserController extends Controller
         ]);
     }
 
+    public function ToggleStatus($id)
+    {
+        // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!$user || !($user->isAdmin())) {
+            return response([
+                'message' => 'No autorizado para actualizar el estado de los usuarios',
+                'data' => [],
+                'error' => true,
+            ], 403);
+        }
+        // Procesamos el request
+        $user = User::find($id);
+        if (!$user) {
+            return response([
+                'message' => 'No se encontró el usuario indicado',
+                'data' => [],
+                'error' => true,
+            ], 404);
+        }
+
+        if ($user->is_enabled == true) {
+            $user->is_enabled = false;
+        } else {
+            $user->is_enabled = true;
+        }
+
+        $user->save();
+
+        return response([
+            'message' => 'Usuario ha sido actualizado exitosamente',
+            'data' => [],
+            'error' => false,
+        ], 200);
+    }
     // Gets 
     public function GetUserById($id)
     {
