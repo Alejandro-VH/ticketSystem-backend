@@ -30,6 +30,7 @@ Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function ()
     Route::get('tickets', [TicketController::class, 'GetAllTickets']);
     Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);
     Route::get('users/{id}/tickets', [TicketController::class, 'GetTicketsByUserId']);
+    Route::get('/tickets/stats', [TicketController::class, 'getTicketStats']);
     Route::patch('tickets/{id}/priority', [TicketController::class, 'ChangePriority']);
     Route::patch('tickets/{id}/status', [TicketController::class, 'ChangeStatus']);
     Route::patch('tickets/{id}/toggle', [TicketController::class, 'ToggleEnabled']);

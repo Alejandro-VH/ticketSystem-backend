@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -19,12 +20,12 @@ class TicketController extends Controller
         ], $messages);
 
         $id = $request->user()->id;
-        if (!$id){
+        if (!$id) {
             return response([
                 'message' => 'No se encontró el usuario indicado',
                 'data' => [],
                 'error' => true,
-            ],404);
+            ], 404);
         }
         $ticket = new Ticket();
         $ticket->title = $request->title;
@@ -37,7 +38,7 @@ class TicketController extends Controller
             'message' => 'Se ha creado el ticket exitosamente',
             'data' => [$ticket],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
     public function UpdateTicket(Request $request, $id)
@@ -67,19 +68,20 @@ class TicketController extends Controller
                 'message' => 'No se encontró el ticket indicado',
                 'data' => [],
                 'error' => true,
-            ],404);
+            ], 404);
         }
 
         $ticket->update($request->all());
-        
+
         return response([
             'message' => 'Ticket actualizado exitosamente',
             'data' => [],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
-    public function ToggleEnabled(Request $request,$id){
+    public function ToggleEnabled(Request $request, $id)
+    {
 
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
         $user = JWTAuth::parseToken()->authenticate();
@@ -97,10 +99,10 @@ class TicketController extends Controller
                 'message' => 'No se encontró el ticket indicado',
                 'data' => [],
                 'error' => true,
-            ],404);
+            ], 404);
         }
 
-        if ($ticket->isEnabled == true){
+        if ($ticket->isEnabled == true) {
             $ticket->isEnabled = false;
         } else {
             $ticket->isEnabled = true;
@@ -112,10 +114,11 @@ class TicketController extends Controller
             'message' => 'Ticket ha sido actualizado exitosamente',
             'data' => [],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
-    public function ChangePriority(Request $request, $id){
+    public function ChangePriority(Request $request, $id)
+    {
 
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
         $user = JWTAuth::parseToken()->authenticate();
@@ -138,28 +141,29 @@ class TicketController extends Controller
                 'message' => 'No se encontró el ticket indicado',
                 'data' => [],
                 'error' => true,
-            ],404);
+            ], 404);
         }
 
-        if ($request->priority == 'low' || $request->priority == 'medium' || $request->priority == 'high'){
+        if ($request->priority == 'low' || $request->priority == 'medium' || $request->priority == 'high') {
             $ticket->priority = $request->priority;
             $ticket->save();
-        }else {
+        } else {
             return response([
                 'message' => 'Se ingreso una prioridad inválida',
                 'data' => [],
                 'error' => true,
-            ],422); 
+            ], 422);
         }
 
         return response([
             'message' => 'Se ha cambiado la prioridad del ticket exitosamente',
             'data' => [],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
-    public function ChangeStatus(Request $request, $id){
+    public function ChangeStatus(Request $request, $id)
+    {
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
         $user = JWTAuth::parseToken()->authenticate();
         if (!$user || !($user->isAdmin() || $user->isSupport())) {
@@ -181,27 +185,27 @@ class TicketController extends Controller
                 'message' => 'No se encontró el ticket indicado',
                 'data' => [],
                 'error' => true,
-            ],404);
+            ], 404);
         }
 
-        if ($request->status == 'open' || $request->status == 'in_progress' || $request->status == 'closed'){
+        if ($request->status == 'open' || $request->status == 'in_progress' || $request->status == 'closed') {
             $ticket->status = $request->status;
             $ticket->save();
-        }else {
+        } else {
             return response([
                 'message' => 'Se ingreso un estado inválido',
                 'data' => [],
                 'error' => true,
-            ],422);  
+            ], 422);
         }
 
         return response([
             'message' => 'Se ha cambiado el estado del ticket exitosamente',
             'data' => [],
             'error' => false,
-        ],200);
+        ], 200);
     }
-    
+
     // Gets
     public function GetAllTickets()
     {
@@ -214,30 +218,30 @@ class TicketController extends Controller
                 'error' => true,
             ], 403);
         }
-        
+
         try {
             $tickets = Ticket::all();
-            if ($tickets->isEmpty()){
+            if ($tickets->isEmpty()) {
                 return response([
                     'message' => 'No se encontraron tickets',
                     'data' => [],
                     'error' => false,
-                ],404);
+                ], 404);
             }
             return response([
                 'message' => 'Tickets encontrados exitosamente',
                 'data' => [$tickets],
                 'error' => false,
-            ],200);
-        } catch (Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
-    
+
     public function GetTicketById($id)
     {
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
@@ -252,24 +256,24 @@ class TicketController extends Controller
 
         try {
             $ticket = Ticket::find($id);
-            if (!$ticket){
+            if (!$ticket) {
                 return response([
                     'message' => 'No se encontró el ticket indicado',
                     'data' => [],
                     'error' => true,
-                ],404);
+                ], 404);
             }
             return response([
                 'message' => 'Ticket encontrado exitosamente',
                 'data' => [$ticket],
                 'error' => false,
-            ],200);
-        } catch (Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al intentar obtener el ticket, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
@@ -287,24 +291,24 @@ class TicketController extends Controller
         // Realizamos la consulta
         try {
             $tickets = Ticket::where('user_id', $id)->get();
-            if (!$tickets){
+            if (!$tickets) {
                 return response([
                     'message' => 'No se encontraron tickets para este usuario',
                     'data' => [],
                     'error' => true,
-                ],404);
+                ], 404);
             }
             return response([
                 'message' => 'Tickets encontrados exitosamente',
                 'data' => [$tickets],
                 'error' => false,
-            ],200);
-        } catch (Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
@@ -322,28 +326,29 @@ class TicketController extends Controller
         // Realizamos la consulta
         try {
             $ticket = Ticket::with('user')->where('id', $id)->where('user_id', $user->id)->first();
-            if (!$ticket){
+            if (!$ticket) {
                 return response([
                     'message' => 'No se encontró el ticket',
                     'data' => [],
                     'error' => true,
-                ],404);
+                ], 404);
             }
             return response([
                 'message' => 'Ticket encontrado exitosamente',
                 'data' => [$ticket],
                 'error' => false,
-            ],200);
-        } catch (Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
-    public function GetMyTickets(){
+    public function GetMyTickets()
+    {
         // Validar si el usuario esta autenticado
         $user = JWTAuth::parseToken()->authenticate();
         if (!$user) {
@@ -355,28 +360,51 @@ class TicketController extends Controller
         }
         try {
             $tickets = Ticket::where('user_id', $user->id)->get();
-            if ($tickets->isEmpty()){
+            if ($tickets->isEmpty()) {
                 return response([
                     'message' => 'No se encontraron tickets para este usuario',
                     'data' => [],
                     'error' => true,
-                ],404);
+                ], 404);
             }
             return response([
                 'message' => 'Tickets encontrados exitosamente',
                 'data' => [$tickets],
                 'error' => false,
-            ],200);
+            ], 200);
         } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al intentar obtener los tickets, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
-    public function GetMessages(){
+    public function getTicketStats()
+    {
+        $total = Ticket::count();
+
+        $pending = Ticket::where('status', 'open')->count();
+
+        $in_progress = Ticket::where('status', 'in_progress')->count();
+
+        $resolved = Ticket::where('status', 'closed')->count();
+
+        return response([
+            'message' => 'Tickets encontrados exitosamente',
+            'data' => [
+                'total' => $total,
+                'pending' => $pending,
+                'in_progress' => $in_progress,
+                'resolved' => $resolved,
+            ],
+            'error' => false,
+        ], 200);
+    }
+
+    public function GetMessages()
+    {
         return [
             'title.required' => 'El campo título es requerido',
             'description.required' => 'El campo descripción es requerido',
