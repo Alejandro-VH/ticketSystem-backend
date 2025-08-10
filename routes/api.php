@@ -23,7 +23,7 @@ Route::middleware('auth:api')->group(function (){
 });
 
 // Rutas protegidas por autenticación y exclusivas para administradores y soporte
-Route::middleware(['auth:api', 'role:admin,soporte'])->group(function () {
+Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function () {
     Route::get('users', [UserController::class, 'GetAllUsers']);
     Route::get('users/{id}', [UserController::class, 'GetUserById']);
 
