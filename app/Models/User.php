@@ -25,7 +25,11 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     // Helper
-    public function hasRole($role){
+    public function hasRole($role)
+    {
+        if (is_array($role)) {
+            return $this->role && in_array($this->role->name, $role);
+        }
         return $this->role && $this->role->name === $role;
     }
 
@@ -40,11 +44,13 @@ class User extends Authenticatable implements JWTSubject
     }
 
     // Relaciones
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
@@ -71,7 +77,7 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-        /**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
