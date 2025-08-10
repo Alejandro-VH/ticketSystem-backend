@@ -321,7 +321,7 @@ class TicketController extends Controller
         }
         // Realizamos la consulta
         try {
-            $ticket = Ticket::where('user_id', $id)->first();
+            $ticket = Ticket::with('user')->where('id', $id)->where('user_id', $user->id)->first();
             if (!$ticket){
                 return response([
                     'message' => 'No se encontró el ticket',
