@@ -33,7 +33,7 @@ class UserController extends Controller
         $credentials = $request->only(['email', 'password']);
 
         try {
-            if (! $token = JWTAuth::attempt($credentials)){
+            if (! $token = JWTAuth::attempt($credentials)) {
                 return response([
                     'message' => 'Credenciales incorrectas',
                     'data' => [],
@@ -50,16 +50,14 @@ class UserController extends Controller
                     'user' => $user,
                 ],
                 'error' => false,
-            ],200);
-            
-        }catch (Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al iniciar sesión, intentelo más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
-
     }
 
     public function Register(Request $request)
@@ -76,14 +74,14 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         // Rol: usuario
-        $user->role_id = '3'; 
+        $user->role_id = '3';
         $user->save();
 
         return response([
             'message' => 'Usuario creado exitosamente',
             'data' => [$user],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
     public function Logout()
@@ -94,7 +92,7 @@ class UserController extends Controller
             'message' => 'Sesión cerrada exitosamente',
             'data' => [],
             'error' => false,
-        ],200);
+        ], 200);
     }
 
     /**
@@ -126,8 +124,9 @@ class UserController extends Controller
     }
 
     // Gets 
-    public function GetUserById($id){
-        try{
+    public function GetUserById($id)
+    {
+        try {
             $user = User::find($id);
             if (!$user) {
                 return response([
@@ -140,18 +139,19 @@ class UserController extends Controller
                 'message' => 'Usuario encontrado exitosamente',
                 'data' => [$user],
                 'error' => false,
-            ],200);
-        } catch(Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al obtener el usuario, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
-    public function GetAllUsers(){
-        try{
+    public function GetAllUsers()
+    {
+        try {
             $users = User::all();
 
             if (!$users) {
@@ -166,18 +166,18 @@ class UserController extends Controller
                 'message' => 'Usuarios encontrados exitosamente',
                 'data' => [$users],
                 'error' => false,
-            ],200);
-
-        } catch(Exception $e){
+            ], 200);
+        } catch (Exception $e) {
             return response([
                 'message' => 'Hubo un error al obtener el usuario, intente más tarde',
                 'data' => ['error' => $e->getMessage()],
                 'error' => true,
-            ],500);
+            ], 500);
         }
     }
 
-    public function GetLoggedUser(){
+    public function GetLoggedUser()
+    {
         return response([
             'message' => 'Usuario logeado:',
             'data' => [
@@ -187,7 +187,30 @@ class UserController extends Controller
         ], 200);
     }
 
-    private function GetMessages(){
+    public function getUserStats()
+    {
+        $total_users = User::count();
+
+        $users = User::where('role_id', '3')->count();
+
+        $supports = User::where('role_id', '2')->count();
+
+        $admins = User::where('role_id', '1')->count();
+
+        return response([
+            'message' => 'Usuarios encontrados exitosamente',
+            'data' => [
+                'total' => $total_users,
+                'open' => $users,
+                'in_progress' => $supports,
+                'closed' => $admins,
+            ],
+            'error' => false,
+        ], 200);
+    }
+
+    private function GetMessages()
+    {
         $messages = [
             'name.required' => 'El nombre es requerido',
             'name.string' => 'El nombre debe ser una cadena de texto',

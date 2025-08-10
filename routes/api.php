@@ -26,7 +26,8 @@ Route::middleware('auth:api')->group(function (){
 Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function () {
     Route::get('users', [UserController::class, 'GetAllUsers']);
     Route::get('users/{id}', [UserController::class, 'GetUserById']);
-
+    Route::get('users/stats', [UserController::class, 'GetUserStats']);
+    
     Route::get('tickets', [TicketController::class, 'GetAllTickets']);
     Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);
     Route::get('users/{id}/tickets', [TicketController::class, 'GetTicketsByUserId']);
