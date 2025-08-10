@@ -201,9 +201,9 @@ class UserController extends Controller
             'message' => 'Usuarios encontrados exitosamente',
             'data' => [
                 'total' => $total_users,
-                'open' => $users,
-                'in_progress' => $supports,
-                'closed' => $admins,
+                'users' => $users,
+                'supports' => $supports,
+                'admins' => $admins,
             ],
             'error' => false,
         ], 200);
