@@ -80,7 +80,7 @@ class TicketController extends Controller
         ], 200);
     }
 
-    public function ToggleEnabled(Request $request, $id)
+    public function ToggleEnabled($id)
     {
 
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
@@ -246,16 +246,20 @@ class TicketController extends Controller
     {
         // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
         $user = JWTAuth::parseToken()->authenticate();
-        if (!$user || !($user->isAdmin() || $user->isSupport())) {
+        if (!$user) {
             return response([
-                'message' => 'No autorizado para actualizar tickets',
+                'message' => 'No estas autenticado',
                 'data' => [],
                 'error' => true,
             ], 403);
         }
 
         try {
-            $ticket = Ticket::find($id);
+            if ($user->isAdmin() || $user->isSupport()){
+                $ticket = Ticket::find($id);
+            }else{
+                $ticket = Ticket::with('user')->where('id', $id)->where('user_id', $user->id)->first();
+            }
             if (!$ticket) {
                 return response([
                     'message' => 'No se encontró el ticket indicado',
