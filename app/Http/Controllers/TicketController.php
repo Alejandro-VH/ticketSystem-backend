@@ -256,7 +256,7 @@ class TicketController extends Controller
 
         try {
             if ($user->isAdmin() || $user->isSupport()){
-                $ticket = Ticket::find($id);
+                $ticket = Ticket::with('user')->where('id', $id)->first();
             }else{
                 $ticket = Ticket::with('user')->where('id', $id)->where('user_id', $user->id)->first();
             }
