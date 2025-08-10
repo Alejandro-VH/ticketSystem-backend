@@ -87,6 +87,7 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 |:----------|:--------:|:---------:|:---------:|
 | GET | /api/users | Retorna todos los usuarios  | ✅ |
 | GET | /api/users/{id} | Retorna un usuario por su id | ✅ |
+| GET | /api/users/stats | Retorna las estadísticas de los usuarios  | ✅ |
 | POST | /api/register | Registro de usuario  | ❌ |
 | POST | /api/login | Iniciar sesión  | ❌ |
 | POST | /api/logout | Cerrar sesión  | ✅ |
@@ -100,6 +101,8 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 | GET | /api/users/{id}/tickets | Retorna todos los tickets de un usuario  | ✅ |
 | GET | /api/my-tickets | Retorna todos los tickets del usuario  | ✅ |
 | GET | /api/tickets/{id}/responses | Retorna todos las respuestas de un ticket  | ✅ |
+| GET | /api/tickets/stats | Retorna las estadísticas de los tickets  | ✅ |
+
 | POST | /api/tickets | Crear ticket  | ✅ |
 | POST | /api/tickets/{id}/responses | Responder ticket  | ✅ |
 | PATCH | /api/tickets/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
