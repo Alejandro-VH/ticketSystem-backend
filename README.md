@@ -14,11 +14,12 @@ Este proyecto corresponde al backend de un Sistema de gestión de **Tickets** de
 - Docker
 - MySQL
 
-## 📋 Requisitos
+## 📋 Requisitos previos
 - PHP
 - Composer
 - Docker
 - Disponibilidad del puerto: 3306
+- Se recomienda usar junto con el [frontend de este proyecto](https://github.com/Alejandro-VH/ticketSystem-frontend)
 
 ## ⚙️ Instalación
 1. Clonar el repositorio
@@ -115,5 +116,5 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 
 ## 👤 Autor
 #### Alejandro Villarroel
-Estudiante de Ingenieria en computación e informática
+Estudiante de Ingeniería en Computación e Informática
 - [Linkedin](https://www.linkedin.com/in/alevillarroel/)
