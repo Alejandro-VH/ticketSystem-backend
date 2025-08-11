@@ -105,7 +105,6 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 | GET | /api/my-tickets | Retorna todos los tickets del usuario  | ✅ |
 | GET | /api/tickets/{id}/responses | Retorna todos las respuestas de un ticket  | ✅ |
 | GET | /api/tickets/stats | Retorna las estadísticas de los tickets  | ✅ |
-
 | POST | /api/tickets | Crear ticket  | ✅ |
 | POST | /api/tickets/{id}/responses | Responder ticket  | ✅ |
 | PATCH | /api/tickets/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
