@@ -6,7 +6,7 @@ Este proyecto corresponde al backend de un Sistema de gestión de **Tickets** de
 - Inicio de sesión y autenticación con JWT
 - Roles de usuario (Administrador, Soporte y Usuario)
 - Creación de Tickets y la capacidad de responderlos
-- Gestión de tickets y usuarios (CRUD)
+- Gestión de tickets y usuarios
 
 ## 🧪 Tecnologías usadas
 - PHP 8.4.7
@@ -68,7 +68,8 @@ php artisan serve
 |:----------|:--------:|---------:|
 | Admin | admin@ticket.cl | admin123  |
 | Soporte | soporte@ticket.cl | soporte123  |
-| Cliente | juan@gmail.com | cliente123  |
+| Cliente | cliente@gmail.com | cliente123  |
+| Cliente | cliente2@gmail.com | cliente123  |
 
 ## 🔐 Roles y permisos
 
@@ -91,6 +92,7 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 | POST | /api/register | Registro de usuario  | ❌ |
 | POST | /api/login | Iniciar sesión  | ❌ |
 | POST | /api/logout | Cerrar sesión  | ✅ |
+| PATCH | /api/users/{id} | Permite editar los campos de un usuario  | ✅ |
 
 
 ### Tickets
@@ -108,6 +110,7 @@ Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
 | PATCH | /api/tickets/{id}/priority | Cambiar la prioridad (low,medium,high)  | ✅ |
 | PATCH | /api/tickets/{id}/status | Cambia el estado (open,in_progress,closed)  | ✅ |
 | PATCH | /api/tickets/{id}/toggle | Habilita / deshabilita el ticket  | ✅ |
+| PATCH | /api/tickets/{id} | Permite editar los campos de un ticket | ✅ |
 
 
 ## 👤 Autor
