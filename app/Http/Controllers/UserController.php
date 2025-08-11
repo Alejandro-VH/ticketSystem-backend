@@ -43,6 +43,14 @@ class UserController extends Controller
 
             $user = JWTAuth::user();
 
+            if ($user->is_enabled == 0) {
+                return response([
+                    'message' => 'Este usuario se encuentra deshabilitado',
+                    'data' => [],
+                    'error' => true,
+                ], 403);
+            }
+
             return response([
                 'message' => 'Se ha iniciado sesión exitosamente',
                 'data' => [
