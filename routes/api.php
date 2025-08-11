@@ -20,6 +20,7 @@ Route::middleware('auth:api')->group(function (){
     Route::patch('tickets/{id}', [TicketController::class, 'UpdateTicket']);
     Route::post('tickets/{id}/responses', [TicketResponseController::class, 'CreateResponse']);
     Route::get('tickets/{id}/responses', [TicketResponseController::class, 'getResponse']);
+    Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);
 });
 
 // Rutas protegidas por autenticación y exclusivas para administradores y soporte
@@ -32,7 +33,6 @@ Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function ()
 
     Route::get('tickets', [TicketController::class, 'GetAllTickets']);
     Route::get('/tickets/stats', [TicketController::class, 'getTicketStats']);
-    Route::get('tickets/{id}', [TicketController::class, 'GetTicketById']);
     Route::get('users/{id}/tickets', [TicketController::class, 'GetTicketsByUserId']);
     Route::patch('tickets/{id}/priority', [TicketController::class, 'ChangePriority']);
     Route::patch('tickets/{id}/status', [TicketController::class, 'ChangeStatus']);
