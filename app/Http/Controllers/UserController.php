@@ -158,6 +158,46 @@ class UserController extends Controller
             'error' => false,
         ], 200);
     }
+
+    public function UpdateUser(Request $request, $id)
+    {
+        // Validar si el usuario esta autenticado y si cuenta con los permisos necesarios
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!$user || !($user->isAdmin() || $user->isSupport())) {
+            return response([
+                'message' => 'No autorizado para actualizar tickets',
+                'data' => [],
+                'error' => true,
+            ], 403);
+        }
+
+        // Procesamos el request
+        $messages = $this->GetMessages();
+        $request->validate([
+            'name' => 'sometimes',
+            'email' => 'sometimes|email',
+            'role_id' => 'sometimes|in:1,2,3',
+            'is_enabled' => 'sometimes|boolean'
+        ], $messages);
+
+        $user = User::find($id);
+        if (!$user) {
+            return response([
+                'message' => 'No se encontró el usuario indicado',
+                'data' => [],
+                'error' => true,
+            ], 404);
+        }
+
+        $user->update($request->all());
+
+        return response([
+            'message' => 'Usuario actualizado exitosamente',
+            'data' => [],
+            'error' => false,
+        ], 200);
+    }
+
     // Gets 
     public function GetUserById($id)
     {
