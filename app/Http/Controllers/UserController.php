@@ -72,9 +72,9 @@ class UserController extends Controller
     {
         $messages = $this->GetMessages();
         $request->validate([
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:40',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8|max:20|confirmed',
         ], $messages);
 
         $user = new User();
@@ -297,13 +297,15 @@ class UserController extends Controller
         $messages = [
             'name.required' => 'El nombre es requerido',
             'name.string' => 'El nombre debe ser una cadena de texto',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres',
+            'name.min' => 'El nombre debe tener al menos 3 caracteres',
+            'name.max' => 'El nombre no puede tener más de 30 caracteres',
             'email.required' => 'El correo electrónico es requerido',
             'email.email' => 'El correo electrónico no es válido',
             'email.unique' => 'El correo electrónico ya está en uso',
             'password.required' => 'La contraseña es requerida',
             'password.string' => 'La contraseña debe ser una cadena de texto',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+            'password.max' => 'La contraseña no puede tener más de 20 caracteres',
             'password.confirmed' => 'Las contraseñas no coinciden',
         ];
         return $messages;

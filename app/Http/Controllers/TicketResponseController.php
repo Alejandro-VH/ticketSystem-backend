@@ -13,7 +13,7 @@ class TicketResponseController extends Controller
     {
         $messages = $this->GetMessages();
         $request->validate([
-            'message' => 'required|string|min:10|max:500',
+            'message' => 'required|string|min:5|max:600',
         ], $messages);
 
         $checkTicket = Ticket::find($id);
@@ -79,6 +79,9 @@ class TicketResponseController extends Controller
             'ticket_id.required' => 'Debe ingresar el ID del ticket',
             'user_id.required' => 'Debe ingresar el ID del usuario',
             'message.required' => 'Debe ingresar una respuesta',
+            'message.string' => 'La respuesta debe ser un texto',
+            'message.min' => 'La respuesta debe tener al menos 5 caracteres',
+            'message.max' => 'La respuesta no puede tener más de 1000 caracteres',
         ];
     }
 }

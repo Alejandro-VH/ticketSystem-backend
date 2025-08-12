@@ -14,8 +14,8 @@ class TicketController extends Controller
     {
         $messages = $this->GetMessages();
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|min:3|max:60',
+            'description' => 'required|string|min:5|max:1000',
             'priority' => 'required',
         ], $messages);
 
@@ -56,8 +56,8 @@ class TicketController extends Controller
         // Procesamos el request
         $messages = $this->GetMessages();
         $request->validate([
-            'title' => 'sometimes',
-            'description' => 'sometimes',
+            'title' => 'sometimes|string',
+            'description' => 'sometimes|string|min:5|max:1000',
             'status' => 'sometimes',
             'priority' => 'sometimes',
         ], $messages);
@@ -416,6 +416,10 @@ class TicketController extends Controller
             'priority.required' => 'El campo prioridad es requerido',
             'ticket_id.required' => 'El campo ID del ticket es requerido',
             'user_id.required' => 'El campo ID del usuario es requerido',
+            'title.string' => 'El título debe ser un texto',
+            'description.string' => 'La descripción debe ser un texto',
+            'description.min' => 'La descripción debe tener al menos 5 caracteres',
+            'description.max' => 'La descripción no puede tener más de 1000 caracteres',
         ];
     }
 }
