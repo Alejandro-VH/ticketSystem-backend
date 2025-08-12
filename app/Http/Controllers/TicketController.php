@@ -387,6 +387,15 @@ class TicketController extends Controller
 
     public function getTicketStats()
     {
+        $user = JWTAuth::parseToken()->authenticate();
+        if (!$user || !($user->isAdmin() || $user->isSupport())) {
+            return response([
+                'message' => 'No autorizado para actualizar tickets',
+                'data' => [],
+                'error' => true,
+            ], 403);
+        }
+
         $total = Ticket::count();
 
         $pending = Ticket::where('status', 'open')->count();
