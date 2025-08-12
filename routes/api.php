@@ -16,6 +16,7 @@ Route::middleware('auth:api')->group(function (){
 
     Route::post('tickets', [TicketController::class, 'CreateTicket']);
     Route::get('my-tickets', [TicketController::class, 'GetMyTickets']);
+    
     Route::get('tickets/my/{id}', [TicketController::class, 'GetMyTicketById']);
     Route::patch('tickets/{id}', [TicketController::class, 'UpdateTicket']);
     Route::post('tickets/{id}/responses', [TicketResponseController::class, 'CreateResponse']);
@@ -27,14 +28,18 @@ Route::middleware('auth:api')->group(function (){
 Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function () {
     Route::get('users', [UserController::class, 'GetAllUsers']);
     Route::get('users/stats', [UserController::class, 'GetUserStats']);
+
+    Route::get('tickets', [TicketController::class, 'GetAllTickets']);
+
     Route::get('users/{id}', [UserController::class, 'GetUserById']);
     Route::patch('users/{id}/status', [UserController::class, 'ToggleStatus']);
     Route::patch('users/{id}', [UserController::class, 'UpdateUser']);
 
-    Route::get('tickets', [TicketController::class, 'GetAllTickets']);
-    Route::get('/tickets/stats', [TicketController::class, 'getTicketStats']);
     Route::get('users/{id}/tickets', [TicketController::class, 'GetTicketsByUserId']);
     Route::patch('tickets/{id}/priority', [TicketController::class, 'ChangePriority']);
     Route::patch('tickets/{id}/status', [TicketController::class, 'ChangeStatus']);
     Route::patch('tickets/{id}/toggle', [TicketController::class, 'ToggleEnabled']);
 });
+
+// Ruta con validacion desde el controlador
+Route::get('tickets/stats', [TicketController::class, 'getTicketStats']);
