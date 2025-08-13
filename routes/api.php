@@ -10,6 +10,9 @@ use App\Http\Controllers\TicketResponseController;
 Route::post('login', [UserController::class, 'Login'])->name('iniciar-sesion');
 Route::post('register', [UserController::class, 'Register'])->name('registro');
 
+// Ruta con validacion desde el controlador
+Route::get('tickets/stats', [TicketController::class, 'getTicketStats']);
+
 // Rutas protegidas por autenticación y sin roles específicos
 Route::middleware('auth:api')->group(function (){
     Route::post('logout', [UserController::class, 'Logout']);
@@ -40,6 +43,3 @@ Route::middleware(['auth:api', 'role:Administrador,Soporte'])->group(function ()
     Route::patch('tickets/{id}/status', [TicketController::class, 'ChangeStatus']);
     Route::patch('tickets/{id}/toggle', [TicketController::class, 'ToggleEnabled']);
 });
-
-// Ruta con validacion desde el controlador
-Route::get('tickets/stats', [TicketController::class, 'getTicketStats']);
