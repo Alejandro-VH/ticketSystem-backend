@@ -12,12 +12,12 @@ Este proyecto corresponde al backend de un Sistema de gestión de **Tickets** de
 - PHP 8.4.7
 - Laravel 12.8.1
 - Docker
-- MySQL
+- MySQL 8.0
 
 ## 📋 Requisitos previos
-- PHP
-- Composer
-- Docker
+- [PHP](https://www.php.net/downloads.php)
+- [Composer](https://getcomposer.org/download/)
+- [Docker](https://www.docker.com/)
 - Disponibilidad del puerto: 3306
 - Se recomienda usar junto con el [frontend de este proyecto](https://github.com/Alejandro-VH/ticketSystem-frontend)
 
