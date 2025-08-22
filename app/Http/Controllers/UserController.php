@@ -162,7 +162,7 @@ class UserController extends Controller
 
         return response([
             'message' => 'Usuario ha sido actualizado exitosamente',
-            'data' => [],
+            'data' => [$user],
             'error' => false,
         ], 200);
     }
@@ -201,7 +201,7 @@ class UserController extends Controller
 
         return response([
             'message' => 'Usuario actualizado exitosamente',
-            'data' => [],
+            'data' => [$user],
             'error' => false,
         ], 200);
     }

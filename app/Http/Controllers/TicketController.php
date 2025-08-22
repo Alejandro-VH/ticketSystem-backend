@@ -75,7 +75,7 @@ class TicketController extends Controller
 
         return response([
             'message' => 'Ticket actualizado exitosamente',
-            'data' => [],
+            'data' => [$ticket],
             'error' => false,
         ], 200);
     }
