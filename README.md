@@ -82,7 +82,7 @@ php artisan serve
 
 ## 🔌 Endpoints
 
-Puedes ver ejemplos de consumir los endpoints [aquí](/postman/) **(WIP)**
+Puedes usar [este archivo](/postman/ticketSystem.postman_collection.json) en postman para consumir los endpoints
 
 ### Usuarios
 | Método | Ruta   | Descripción  | Autenticación |
