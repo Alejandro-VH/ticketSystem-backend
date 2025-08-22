@@ -35,7 +35,7 @@ class TicketResponseController extends Controller
         }
 
         $ticket = new TicketResponse();
-        $ticket->ticket_id = $request->ticket_id;
+        $ticket->ticket_id = $id;
         $ticket->user_id = $checkUser;
         $ticket->message = $request->message;
 
