@@ -294,7 +294,7 @@ class TicketController extends Controller
         }
         // Realizamos la consulta
         try {
-            $tickets = Ticket::where('user_id', $id)->get();
+            $tickets = Ticket::where('user_id', $id)->latest()->get();
             if (!$tickets) {
                 return response([
                     'message' => 'No se encontraron tickets para este usuario',
@@ -363,7 +363,7 @@ class TicketController extends Controller
             ], 403);
         }
         try {
-            $tickets = Ticket::where('user_id', $user->id)->get();
+            $tickets = Ticket::where('user_id', $user->id)->latest()->get();
             if ($tickets->isEmpty()) {
                 return response([
                     'message' => 'No se encontraron tickets para este usuario',
